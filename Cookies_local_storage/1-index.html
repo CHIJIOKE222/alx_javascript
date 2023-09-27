@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device=width, initial=scale=1.0">
+        <title>Cookie LS</title>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Login to the website</h1>
+            
+            <input type="=text" id="firstname" placeholder="First name">
+            <input type="text" id="email" placeholder="Email">
+            <button onclick="setCookies()">Log me in</button>
+            <br><br>
+
+            <h1>Cookies</h1>
+
+            <button onclick="showCookies()">show the Cookies</button>
+        </div>
+
+        <script>
+            function setCookies() {
+                const firstName = document.getElementById('firstname').value;
+                const email = document.getElementById('email').value;
+                
+                // Set cookies for first name and email with expiration date (10 days)
+                const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 10);
+                const options = { expires: expirationDate };
+                
+                document.cookie = `firstname=${firstName}; expires=${options.expires.toUTCString()}`;
+                document.cookie = `email=${email}; expires=${options.expires.toUTCString()}`;
+            }
+
+            function showCookies() {
+                const email = getCookie('email');
+                const firstname = getCookie('firstname');
+                const cookiesElement = document.createElement('p');
+                cookiesElement.innerHTML = `Email: ${email} - Firstname: ${firstname}`;
+                document.body.appendChild(cookiesElement);
+            }
+        </script>
+    </body>
+</html>
